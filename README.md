@@ -1,19 +1,94 @@
 # Crowdfunding_ETL
-Executive Summary & Introduction
 
-Our goal for this project was to extract and transform a larger dataset, crowdfunding.xlsx. We were able to it down to multiple more manageable dataframes and export those files as CSVs. This information contained campaign donor information, and was cleaned and exported into four files – Category.csv, Subcategory.csv, Campaign.csv, and Contacts.csv – that were more easily loaded into a created schema in our Postgres database. 
+### Executive Summary & Introduction
 
-
-Data Collection and Preparation
-
-The data was collected and given to our team as part of the assignment. We browsed through the data to better understand what the xlsx file that we were given contained. Once Bella and I better understood the contents of the file we began to plan out what our next steps would be – what data cleaning was necessary, how we would go about our tasks of extracting and transforming the data, and the creation of the database schema.
+The objective of the Crowdfunding ETL (Extract, Transform, Load) project was to extract data from the given "crowdfunding.xlsx" dataset, transform it into multiple more manageable dataframes, and load the cleaned data into a Postgres database. The dataset contained information about crowdfunding campaigns, including campaign donor information. The data was cleaned, organized, and exported into four CSV files - Category.csv, Subcategory.csv, Campaign.csv, and Contacts.csv - for easy loading into the database schema.
 
 
-Data Exploration and Cleaning
-
-We created four separate csv files which better organized the data. We were able to look at the separate crowdfunding sources and split them into categories and subcategories to better determine which types of activities are the most successful. The other two files began as a list of donors, contact information, pledges and actual donations, and which categories their fundraiser belonged to. We cleaned that file by organizing the columns in a more readable fashion as well as creating the Contacts table which has only the important contact information for each donor from the original sheet. Once we had the csv files created, we structured a database schema in SQL using PGAdmin. We loaded the data into those tables and ensured that the information had properly populated. 
+### Data Collection and Preparation
 
 
-Data Analysis & Conclusion
+The raw data in the form of an "xlsx" file was provided to the team for analysis. The team browsed through the data to understand its structure and contents. Upon understanding the data, the team planned the necessary data cleaning steps, extraction, transformation, and the creation of the database schema.
 
-After looking at the cleaned and loaded data it is clear that fundraising and meeting goals is not as easy as one would hope. Of the 1,000 campaigns that were included in the dataset, 44.2% ended up being classified as either canceled or failed, with some still in progress that could fall in either category. It was interesting that many of these campaigns seem to be more grassroots focused as the average number of backers is 727 people. 
+
+### Data Exploration and Cleaning
+
+
+The data exploration and cleaning process involved the following steps:
+
+
+Created separate CSV files for better data organization:
+
+Category.csv: Contains unique categories along with sequential category IDs.
+
+Subcategory.csv: Contains unique subcategories along with sequential subcategory IDs.
+
+Campaign.csv: Contains information about individual campaigns, including "cf_id," "contact_id," "company_name," "description," "goal," "pledged," "backers_count," "country," "currency," "launch_date," "end_date," "category_id," "subcategory_id," and the four-digit contact ID from the "contacts.xlsx" file.
+
+Contacts.csv: Contains contact information of donors with columns "contact_id," "first_name," "last_name," and "email."
+
+Cleaned and organized the "Campaign.csv" file:
+
+
+Renamed columns "blurb" to "description," "launched_at" to "launch_date," and "deadline" to "end_date."
+
+Split "category & sub-category" into separate "category" and "subcategory" columns.
+
+Converted "goal" and "pledged" columns to float data types.
+
+Formatted "launch_date" and "end_date" columns into datetime format.
+
+Extracted and organized unique categories and subcategories:
+
+
+Created Category DataFrame with columns "category_id" and "category."
+
+Created Subcategory DataFrame with columns "subcategory_id" and "subcategory."
+
+Exported both DataFrames as CSV files.
+
+Extracted and organized contact information:
+
+
+Iterated through the "contact_info_df" and created a "Contacts" DataFrame with columns "contact_id," "first_name," "last_name," and "email."
+
+Exported the "Contacts" DataFrame as a CSV file.
+
+
+### Data Analysis & Conclusion
+
+
+After analyzing the cleaned and loaded data, it was observed that fundraising and meeting campaign goals is challenging. Out of the 1,000 campaigns in the dataset, 44.2% ended up as either canceled or failed, with some still in progress that could fall into either category. Additionally, it was noted that many campaigns seemed to have a grassroots focus, as the average number of backers was 727 people.
+
+
+### Code and Output
+
+
+The project involved the use of Python and Pandas for data manipulation, extraction, and transformation. The code used for data cleaning, creation of DataFrames, and exporting CSV files is provided in the code/output section.
+
+
+###  Dependencies
+
+
+The project requires the following dependencies to be installed:
+
+Pandas
+
+NumPy
+
+
+### How to Use
+
+
+To replicate the ETL process:
+
+
+Ensure you have the necessary dependencies installed.
+
+Place the "crowdfunding.xlsx" and "contacts.xlsx" files in the "Resources" folder.
+
+Execute the provided Python code in a Jupyter Notebook or any Python environment.
+
+The code will create and export the CSV files for Category, Subcategory, Campaign, and Contacts.
+
+The generated CSV files can then be used to load data into a Postgres database.
